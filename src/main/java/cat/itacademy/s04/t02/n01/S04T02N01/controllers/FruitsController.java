@@ -1,9 +1,7 @@
 package cat.itacademy.s04.t02.n01.S04T02N01.controllers;
 
 import cat.itacademy.s04.t02.n01.S04T02N01.config.DatabaseConnectionManager;
-import cat.itacademy.s04.t02.n01.S04T02N01.model.CustomError;
 import cat.itacademy.s04.t02.n01.S04T02N01.model.Fruit;
-import cat.itacademy.s04.t02.n01.S04T02N01.utils.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
@@ -43,7 +41,7 @@ public class FruitsController {
       List<Object> params = new ArrayList<>();
       Connection conn = DatabaseConnectionManager.getConnection();
 
-      if(!Utils.isReallyEmpty(name)) {
+      if(name!=null) {
         querySb.append("name = ?,");
         params.add(name);
       }
@@ -99,7 +97,7 @@ public class FruitsController {
       }
   }
 
-  @PutMapping("/delete")
+  @DeleteMapping("/delete")
   public ResponseEntity<String> delete(@RequestParam int id){
     try {
       ResponseEntity<String> result = getOne(id);
