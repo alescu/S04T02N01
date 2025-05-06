@@ -1,6 +1,6 @@
-package cat.itacademy.s04.t02.n01.S04T02N01.exception;
+package cat.itacademy.s04.t02.n01.exception;
 
-import cat.itacademy.s04.t02.n01.S04T02N01.model.CustomError;
+import cat.itacademy.s04.t02.n01.model.CustomError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

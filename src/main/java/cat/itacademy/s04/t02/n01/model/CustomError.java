@@ -1,4 +1,4 @@
-package cat.itacademy.s04.t02.n01.S04T02N01.model;
+package cat.itacademy.s04.t02.n01.model;
 
 public class CustomError {
     int errorCode;
