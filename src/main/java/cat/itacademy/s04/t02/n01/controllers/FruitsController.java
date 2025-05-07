@@ -1,5 +1,6 @@
 package cat.itacademy.s04.t02.n01.controllers;
 
+import cat.itacademy.s04.t02.n01.model.ApiResponse;
 import cat.itacademy.s04.t02.n01.model.Fruit;
 import cat.itacademy.s04.t02.n01.services.FruitsServices;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,10 +20,13 @@ public class FruitsController {
   @Autowired
   private FruitsServices fruitsServices;
 
+
   @PostMapping("/add")
-  public ResponseEntity<String> addingFruit(@RequestParam String name,@RequestParam double kg){
+  public ResponseEntity<String> addingFruit(@RequestParam String name,@RequestParam double kg) throws JsonProcessingException {
     fruitsServices.saveFruit(name, kg);
-    return ResponseEntity.status(HttpStatus.OK).body("Fruit added successfully");
+    ApiResponse response = new ApiResponse(HttpStatus.OK.value(), "Fruit added successfully");
+    ObjectMapper mapper = new ObjectMapper();
+    return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(response));
   }
 
 
@@ -31,7 +35,10 @@ public class FruitsController {
     try {
       ObjectMapper mapper = new ObjectMapper();
       String jsonFruit = mapper.writeValueAsString(fruitsServices.getAllFruits());
-      return ResponseEntity.ok(jsonFruit);
+
+      ApiResponse response = new ApiResponse(HttpStatus.OK, jsonFruit);
+      return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(response));
+
     } catch (JsonProcessingException e) {
       throw new ResponseStatusException(
               HttpStatus.INTERNAL_SERVER_ERROR, "Error showing data", e);
@@ -39,25 +46,37 @@ public class FruitsController {
   }
 
   @DeleteMapping("/delete")
-  public ResponseEntity<String> delete(@RequestParam int id){
+  public ResponseEntity<String> delete(@RequestParam int id) throws JsonProcessingException {
+    String message;
+    int statusCode;
     if (fruitsServices.deleteFruitById(id)) {
-      return ResponseEntity.status(HttpStatus.OK).body("Fruit with ID " + id + " deleted successfully.");
+      message="Fruit with ID " + id + " deleted successfully.";
+      statusCode=HttpStatus.OK.value();
     }else{
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fruit with ID " + id + " not found.");
+      message="Fruit with ID " + id + " not found.";
+      statusCode=HttpStatus.NOT_FOUND.value();
     }
+    ApiResponse response = new ApiResponse(statusCode, message);
+    ObjectMapper mapper = new ObjectMapper();
+    return ResponseEntity.status(statusCode).body(mapper.writeValueAsString(response));
   }
 
   @GetMapping("/getOne")
   public ResponseEntity<String> getOne(@RequestParam int id){
+    String message;
+    int statusCode;
     try{
       Fruit fruit = fruitsServices.getFruitById(id);
+      ObjectMapper mapper = new ObjectMapper();
       if(fruit!=null){
-        ObjectMapper mapper = new ObjectMapper();
         String jsonFruit = mapper.writeValueAsString(fruit);
-        return ResponseEntity.ok(jsonFruit);
-      }else{
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" Fruit id not found");
+        ApiResponse response = new ApiResponse(HttpStatus.OK, jsonFruit);
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(response));
       }
+      statusCode=HttpStatus.NOT_FOUND.value();
+      message="Fruit with ID " + id + " not found.";
+      ApiResponse response = new ApiResponse(statusCode, message);
+      return ResponseEntity.status(statusCode).body(mapper.writeValueAsString(response));
 
     } catch (JsonProcessingException e) {
       throw new ResponseStatusException(
@@ -66,12 +85,19 @@ public class FruitsController {
   }
 
   @PutMapping("/update")
-  public ResponseEntity<String> updateFruit(@RequestParam int id, String name, Double kg){
+  public ResponseEntity<String> updateFruit(@RequestParam int id, String name, Double kg) throws JsonProcessingException {
+    String message;
+    int statusCode;
     if(fruitsServices.updateFruit(id, name, kg)){
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" Fruit updated");
+      message="Fruit updated";
+      statusCode=HttpStatus.OK.value();
     }else{
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" Fruit id not found");
+      message="Fruit id not found";
+      statusCode=HttpStatus.OK.value();
     }
+    ApiResponse response = new ApiResponse(statusCode, message);
+    ObjectMapper mapper = new ObjectMapper();
+    return ResponseEntity.status(statusCode).body(mapper.writeValueAsString(response));
   }
 
 }
