@@ -34,7 +34,7 @@ Following the MVC pattern, the project is organized into the following packages 
 
 ### API Endpoints
 
-The `FruitaController` (located in the `controllers` package) provides the following REST API endpoints to manage fruit data:
+The `FruitsController` (located in the `controllers` package) provides the following REST API endpoints to manage fruit data:
 
 * `POST http://localhost:8080/fruita/add`: Adds a new fruit. The request body will likely contain the `nom` and `quantitatQuilos` of the fruit.
 * `PUT http://localhost:8080/fruita/update`: Updates an existing fruit. The request body will likely contain the `id`, `nom`, and `quantitatQuilos` of the fruit to be updated.
