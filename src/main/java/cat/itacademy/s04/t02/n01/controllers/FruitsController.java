@@ -1,6 +1,7 @@
 package cat.itacademy.s04.t02.n01.controllers;
 
 import cat.itacademy.s04.t02.n01.model.Fruit;
+import cat.itacademy.s04.t02.n01.repository.FruitsRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class FruitsController {
 
   @Autowired
-  private cat.itacademy.s04.t02.n01.repository.FruitsRepository fruitsRepository;
+  private FruitsRepository fruitsRepository;
 
   @PostMapping("/add")
   public ResponseEntity<String> addingFruit(@RequestParam String name,@RequestParam double kg){

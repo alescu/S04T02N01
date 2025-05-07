@@ -21,7 +21,7 @@ The `Fruit` entity has the following properties:
 
 * `int id`: A unique identifier for the fruit.
 * `String nom`: The name of the fruit.
-* `int quantitatQuilos`: The quantity of the fruit in kilograms.
+* `double quantitatQuilos`: The quantity of the fruit in kilograms.
 
 ### Project Structure
 
@@ -29,7 +29,6 @@ Following the MVC pattern, the project is organized into the following packages 
 
 * `cat.itacademy.s04.t02.n01.controllers`: Contains the controller classes responsible for handling incoming HTTP requests and interacting with the service layer.
 * `cat.itacademy.s04.t02.n01.model`: Contains the entity classes representing the data model (in this case, the `Fruit` entity).
-* `cat.itacademy.s04.t02.n01.services`: Contains the service layer classes that hold the business logic and interact with the repository layer.
 * `cat.itacademy.s04.t02.n01.repository`: Contains the repository interfaces responsible for data access and persistence using JPA.
 * `cat.itacademy.s04.t02.n01.exception`: (Optional) Contains any custom exception classes used in the application.
 
@@ -58,11 +57,11 @@ This setup provides a basic RESTful API for managing `Fruit` entities persisted 
 
 ## Requirements
 
-* Java 22 or higher.
+* Java 21 or higher.
 
 ## Installation and Execution
 
-1. 	Install Java 22 or higher on your system.
+1. 	Install Java 21 or higher on your system.
 2.  Download the project.
 3.  Import it into IDE
 4.  Compile the project using a Java compiler or an IDE.
