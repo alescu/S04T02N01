@@ -11,16 +11,16 @@ public class Fruit {
     @Column
     private String name;
     @Column
-    private double kg;
+    private Double kg;
 
     public Fruit(){}
 
-    public Fruit(String name, int kg) {
+    public Fruit(String name, Double kg) {
         this.name = name;
         this.kg = kg;
     }
 
-    public Fruit(int id, String name, double kg) {
+    public Fruit(int id, String name, Double kg) {
         this.id = id;
         this.name = name;
         this.kg = kg;
@@ -38,11 +38,11 @@ public class Fruit {
         this.name = name;
     }
 
-    public double getKg() {
+    public Double getKg() {
         return kg;
     }
 
-    public void setKg(double kg) {
+    public void setKg(Double kg) {
         this.kg = kg;
     }
 }

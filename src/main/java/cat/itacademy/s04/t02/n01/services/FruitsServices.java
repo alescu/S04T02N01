@@ -3,35 +3,30 @@ package cat.itacademy.s04.t02.n01.services;
 import cat.itacademy.s04.t02.n01.model.Fruit;
 import cat.itacademy.s04.t02.n01.repository.FruitsRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FruitsServices {
-    @Autowired
-    private FruitsRepository fruitsRepository;
 
-    public void saveFruit(String name, double kg){
-        Fruit n = new Fruit();
-        n.setName(name);
-        n.setKg(kg);
-        fruitsRepository.save(n);
+    private final FruitsRepository fruitsRepository;
+
+    FruitsServices(FruitsRepository fruitsRepository){
+        this.fruitsRepository = fruitsRepository;
     }
 
-    public Iterable<Fruit> getAllFruits() throws SQLException {
+    public Fruit saveFruit(Fruit fruit){
+        return fruitsRepository.save(fruit);
+    }
+
+    public List<Fruit> getAllFruits() {
        return fruitsRepository.findAll();
     }
 
-    public boolean deleteFruitById(int id){
-        if (fruitsRepository.existsById(id)) {
-            fruitsRepository.deleteById(id);
-            return true;
-        }else{
-            return false;
-        }
+    public void deleteFruitById(int id){
+        fruitsRepository.deleteById(id);
     }
 
     public Fruit getFruitById( int id){
@@ -39,21 +34,20 @@ public class FruitsServices {
         return optFruit.orElse(null);
     }
 
-    public boolean updateFruit(int id, String name, Double kg){
+    public Fruit updateFruit(int id, Fruit fruit){
         Optional<Fruit> optFruit = fruitsRepository.findById(id);
         if(optFruit.isPresent()){
-            if(name!=null) {
-                optFruit.get().setName(name);
+            if(fruit.getName()!=null) {
+                optFruit.get().setName(fruit.getName());
             }
-            if(kg!=null && !kg.isNaN()) {
-                optFruit.get().setKg(kg);
+            if(fruit.getKg()!=null) {
+                optFruit.get().setKg(fruit.getKg());
             }
             ObjectMapper mapper = new ObjectMapper();
             fruitsRepository.save(optFruit.get());
-            return true;
-        }else{
-            return false;
+            return optFruit.get();
         }
+        return null;
     }
 
 }

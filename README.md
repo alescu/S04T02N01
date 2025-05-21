@@ -21,7 +21,7 @@ The `Fruit` entity has the following properties:
 
 * `int id`: A unique identifier for the fruit.
 * `String nom`: The name of the fruit.
-* `double quantitatQuilos`: The quantity of the fruit in kilograms.
+* `double kg`: The quantity of the fruit in kilograms.
 
 ### Project Structure
 
@@ -36,11 +36,11 @@ Following the MVC pattern, the project is organized into the following packages 
 
 The `FruitsController` (located in the `controllers` package) provides the following REST API endpoints to manage fruit data:
 
-* `POST http://localhost:8080/fruita/add`: Adds a new fruit. The request body will likely contain the `nom` and `quantitatQuilos` of the fruit.
-* `PUT http://localhost:8080/fruita/update`: Updates an existing fruit. The request body will likely contain the `id`, `nom`, and `quantitatQuilos` of the fruit to be updated.
-* `DELETE http://localhost:8080/fruita/delete/{id}`: Deletes a fruit with the specified `{id}`.
-* `GET http://localhost:8080/fruita/getOne/{id}`: Retrieves the details of a fruit with the specified `{id}`.
-* `GET http://localhost:8080/fruita/getAll`: Retrieves a list of all fruits.
+* `POST http://localhost:8080/fruits`: Adds a new fruit. The request body will likely contain the `nom` and `quantitatQuilos` of the fruit.
+* `PUT http://localhost:8080/fruits/{id}`: Updates an existing fruit. The request body will likely contain the `id`, `nom`, and `quantitatQuilos` of the fruit to be updated.
+* `DELETE http://localhost:8080/fruits/{id}`: Deletes a fruit with the specified `{id}`.
+* `GET http://localhost:8080/fruits/{id}`: Retrieves the details of a fruit with the specified `{id}`.
+* `GET http://localhost:8080/fruits`: Retrieves a list of all fruits.
 
 This setup provides a basic RESTful API for managing `Fruit` entities persisted in an H2 database using JPA and following the principles of the MVC architecture.
 
