@@ -16,29 +16,29 @@ public class FruitsController {
   @Autowired
   private FruitsServices fruitsServices;
 
-  @PostMapping("/add")
+  @PostMapping("")
   public ResponseEntity<Fruit> addingFruit(@RequestBody Fruit fruit){
     return ResponseEntity.status(HttpStatus.CREATED).body(fruitsServices.saveFruit(fruit));
   }
 
-  @GetMapping("/getAll")
+  @GetMapping("")
   public ResponseEntity<List<Fruit>> getAll() {
       return ResponseEntity.status(HttpStatus.OK).body(fruitsServices.getAllFruits());
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<String> delete(@PathVariable int id) {
     fruitsServices.deleteFruitById(id);
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping("/getOne/{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<Fruit> getOne(@PathVariable int id){
       Fruit fruit = fruitsServices.getFruitById(id);
       return ResponseEntity.status(HttpStatus.OK).body(fruit);
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<Fruit> updateFruit(@PathVariable int id, @RequestBody Fruit fruit) {
     return ResponseEntity.status(HttpStatus.OK).body(fruitsServices.updateFruit(id, fruit));
   }
