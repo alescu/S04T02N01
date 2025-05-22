@@ -30,7 +30,7 @@ Following the MVC pattern, the project is organized into the following packages 
 * `cat.itacademy.s04.t02.n01.controllers`: Contains the controller classes responsible for handling incoming HTTP requests and interacting with the service layer.
 * `cat.itacademy.s04.t02.n01.model`: Contains the entity classes representing the data model (in this case, the `Fruit` entity).
 * `cat.itacademy.s04.t02.n01.repository`: Contains the repository interfaces responsible for data access and persistence using JPA.
-* `cat.itacademy.s04.t02.n01.exception`: (Optional) Contains any custom exception classes used in the application.
+* `cat.itacademy.s04.t02.n01.exception`: Contains any custom exception classes used in the application.
 
 ### API Endpoints
 
